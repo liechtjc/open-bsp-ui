@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
@@ -63,6 +64,11 @@ import { Route as AuthIntegrationsWhatsappOrgAddressIdTemplatesIndexRouteImport 
 import { Route as AuthIntegrationsWhatsappOrgAddressIdTemplatesNewRouteImport } from './routes/_auth/integrations/whatsapp/$orgAddressId/templates/new'
 import { Route as AuthIntegrationsWhatsappOrgAddressIdTemplatesTemplateIdRouteImport } from './routes/_auth/integrations/whatsapp/$orgAddressId/templates/$templateId'
 
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -358,6 +364,7 @@ const AuthIntegrationsWhatsappOrgAddressIdTemplatesTemplateIdRoute =
 
 export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/stats': typeof AuthStatsRouteWithChildren
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
@@ -412,6 +419,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
   '/oauth/instagram': typeof OauthInstagramRoute
@@ -467,6 +475,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_auth': typeof AuthRouteWithChildren
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/_auth/stats': typeof AuthStatsRouteWithChildren
   '/oauth/callback': typeof OauthCallbackRoute
   '/oauth/consent': typeof OauthConsentRoute
@@ -523,6 +532,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/login'
+    | '/reset-password'
     | '/stats'
     | '/oauth/callback'
     | '/oauth/consent'
@@ -577,6 +587,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
+    | '/reset-password'
     | '/oauth/callback'
     | '/oauth/consent'
     | '/oauth/instagram'
@@ -631,6 +642,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_auth'
     | '/login'
+    | '/reset-password'
     | '/_auth/stats'
     | '/oauth/callback'
     | '/oauth/consent'
@@ -687,6 +699,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   LoginRoute: typeof LoginRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   OauthCallbackRoute: typeof OauthCallbackRoute
   OauthConsentRoute: typeof OauthConsentRoute
   OauthInstagramRoute: typeof OauthInstagramRoute
@@ -697,6 +710,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -1195,6 +1215,7 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   LoginRoute: LoginRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   OauthCallbackRoute: OauthCallbackRoute,
   OauthConsentRoute: OauthConsentRoute,
   OauthInstagramRoute: OauthInstagramRoute,
